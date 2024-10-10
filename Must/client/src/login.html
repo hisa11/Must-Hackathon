@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustにログイン</title>
+    <link rel="stylesheet" href="login.css"> <!-- CSSファイルへのリンク -->
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Mustにログイン</h1>
+        </header>
+        <form id="loginForm">
+            <label for="username">ユーザー名:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <small><a href="signup.html">アカウントを持っていない方はこちら</a></small> <!-- アカウント作成ページへのリンク -->
+            <br>
+            <label for="password">パスワード:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">ログイン</button>
+        </form>
+        <p id="loginMessage"></p>
+    </main>
+    <footer>
+        <!-- <p>&copy; 2023 サンプルサイト. All rights reserved.</p> -->
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

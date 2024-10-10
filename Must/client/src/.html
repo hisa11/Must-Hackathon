@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Must 勉強補助ツール</title>
+    <link rel="stylesheet" href="styles.css"> <!-- CSSファイルへのリンク -->
+</head>
+
+<body>
+    <header>
+        <h1>Must 勉強補助ツール✌︎('ω')✌︎</h1>
+        <nav>
+            <ul>
+                <li><a href="#services">サービス</a></li>
+                <li><a href="#contact" id="contactLink">お問い合わせ</a></li> <!-- お問い合わせリンク -->
+                <li><a href="login.html" class="login-link">ログイン</a></li> <!-- ログインページへのリンク -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="services">
+            <h2>サービス</h2>
+            <p>ここにサービスのコンテンツが入ります。</p>
+        </section>
+        <section id="contact">
+            <h2>お問い合わせ</h2>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5755.945768332271!2d135.6287348877747!3d34.77108519629879!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60011e700a3f7093%3A0x27f44d0a4f6c49f0!2z5aSn6Ziq5bqc56uL5aSn5a2m5bel5qWt6auY562J5bCC6ZaA5a2m5qCh!5e0!3m2!1sja!2sjp!4v1726731446396!5m2!1sja!2sjp"
+                width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024やる気のないMustチーム.</p>
+    </footer>
+    <script>
+        document.getElementById('contactLink').addEventListener('click', function (event) {
+            event.preventDefault(); // デフォルトのリンク動作を無効化
+            alert('そんなもんねぇよ');
+        });
+    </script>
+</body>
+
+</html>

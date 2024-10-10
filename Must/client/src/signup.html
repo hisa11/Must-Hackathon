@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mustにサインアップ</title>
+    <link rel="stylesheet" href="login.css"> <!-- CSSファイルへのリンク -->
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Mustにサインアップ</h1>
+        </header>
+        <form id="signupForm">
+            <label for="username">ユーザー名:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="email">メールアドレス:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="password">パスワード:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <label for="confirmPassword">パスワード確認:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <br>
+            <button type="submit">サインアップ</button>
+        </form>
+        <p id="signupMessage"></p>
+    </main>
+    <footer>
+        <!-- <p>&copy; 2023 サンプルサイト. All rights reserved.</p> -->
+    </footer>
+    <script src="signup.js"></script>
+</body>
+</html>
