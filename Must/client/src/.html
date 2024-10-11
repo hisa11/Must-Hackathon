@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Must 勉強補助ツール</title>
-    <link rel="stylesheet" href="styles.css"> <!-- CSSファイルへのリンク -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Must 勉強補助ツール</title>
+<link rel="stylesheet" href="styles.css"> <!-- CSSファイルへのリンク -->
 </head>
 
 <body>
@@ -31,6 +26,11 @@
                 width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
+        <section id="twitter">
+            <h2>Twitter</h2>
+            <a href="https://twitter.com/x?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @x</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </section>
     </main>
     <footer>
         <p>© 2024やる気のないMustチーム.</p>
@@ -40,7 +40,21 @@
             event.preventDefault(); // デフォルトのリンク動作を無効化
             alert('そんなもんねぇよ');
         });
+
+        // Hide/show header on scroll
+        let lastScrollTop = 0;
+        window.addEventListener("scroll", function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const header = document.querySelector('header');
+            if (scrollTop > lastScrollTop) {
+                // 下にスクロール
+                header.classList.add('hidden');
+            } else {
+                // 上にスクロール
+                header.classList.remove('hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+        });
     </script>
 </body>
-
 </html>
