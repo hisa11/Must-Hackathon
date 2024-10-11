@@ -1,4 +1,3 @@
-// Must/server/mustserver/userRoutes.js
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql2/promise');
@@ -21,7 +20,8 @@ router.post('/users', async (req, res) => {
     const { username, email, password } = req.body;
     try {
         const connection = await mysql.createConnection(dbConfig);
-        await connection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, password]);
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await connection.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, hashedPassword]);
         await connection.end();
         res.status(201).json({ message: 'ユーザーが追加されました。' });
     } catch (error) {

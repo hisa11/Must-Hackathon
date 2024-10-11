@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             signupMessage.textContent = 'パスワードが一致しません。';
             signupMessage.style.color = 'red';
             signupMessage.style.backgroundColor = 'lightblue'; // 背景色を水色に設定
-            return;
+            return; // パスワードが一致しない場合はここで処理を終了
         }
 
         fetch(`http://localhost:${PORT}/api/auth/signup`, {
@@ -30,6 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 signupMessage.textContent = 'サインアップ成功！';
                 signupMessage.style.color = 'green';
                 signupMessage.style.backgroundColor = ''; // 背景色をリセット
+
+                // 2秒後にサインイン画面にリダイレクト
+                setTimeout(function() {
+                    window.location.href = '../login.html';
+                }, 2000);
             } else {
                 throw new Error(data.message);
             }

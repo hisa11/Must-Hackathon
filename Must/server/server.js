@@ -12,11 +12,17 @@ const path = require('path');
 
 const app = express();
 const PORT = config.port;
+const adminRoutes = require('./adminRoutes');
+const userRoutes = require('./userRoutes'); // userRoutes をインポート
 const SECRET_KEY = config.secretKey;
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.json());
+app.use('/api/admin', adminRoutes);
+app.use('/api/auth', userRoutes); // userRoutes を設定
 
 const dbConfig = config.dbConfig;
 
