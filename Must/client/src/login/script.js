@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // トークンをローカルストレージに保存
                 localStorage.setItem('token', data.token);
                 console.log('Token saved:', data.token); // トークンのログ追加
+                setTimeout(() => {
+                    window.location.href = '../user_home/user_home.html'; // ユーザーページにリダイレクト
+                }, 1000);
             } else {
                 throw new Error(data.message);
             }

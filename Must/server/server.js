@@ -5,24 +5,26 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mysql = require('mysql2/promise');
 const dotenv = require('dotenv');
+const os = require('os');
+const path = require('path');
 dotenv.config();
+
 const config = require('./config');
 const initializeDatabase = require('./init_db');
-const path = require('path');
+const adminRoutes = require('./adminRoutes');
+const userRoutes = require('./userRoutes');
+const authenticateToken = require('./authMiddleware'); // 認証ミドルウェアをインポート
 
 const app = express();
 const PORT = config.port;
-const adminRoutes = require('./adminRoutes');
-const userRoutes = require('./userRoutes'); // userRoutes をインポート
 const SECRET_KEY = config.secretKey;
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.json());
 app.use('/api/admin', adminRoutes);
-app.use('/api/auth', userRoutes); // userRoutes を設定
+app.use('/api/auth', userRoutes);
 
 const dbConfig = config.dbConfig;
 
@@ -39,6 +41,19 @@ async function connectToDatabase() {
 
 // サーバー起動時にデータベースを初期化
 initializeDatabase();
+
+// サーバーのIPアドレスを取得する関数
+function getServerIp() {
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            if (iface.family === 'IPv4' && !iface.internal) {
+                return iface.address;
+            }
+        }
+    }
+    return 'localhost';
+}
 
 // サインアップエンドポイント
 app.post('/api/auth/signup', async (req, res) => {
@@ -100,7 +115,7 @@ app.post('/api/auth/login', async (req, res) => {
 });
 
 // 管理者機能エンドポイント
-app.get('/api/admin/users', async (req, res) => {
+app.get('/api/admin/users', authenticateToken, async (req, res) => { // 認証ミドルウェアを適用
     const connection = await connectToDatabase();
 
     try {
@@ -114,7 +129,7 @@ app.get('/api/admin/users', async (req, res) => {
     }
 });
 
-app.post('/api/admin/users', async (req, res) => {
+app.post('/api/admin/users', authenticateToken, async (req, res) => { // 認証ミドルウェアを適用
     const { username, email, password } = req.body;
     const connection = await connectToDatabase();
 
@@ -130,7 +145,7 @@ app.post('/api/admin/users', async (req, res) => {
     }
 });
 
-app.delete('/api/admin/users/:id', async (req, res) => {
+app.delete('/api/admin/users/:id', authenticateToken, async (req, res) => { // 認証ミドルウェアを適用
     const { id } = req.params;
     const connection = await connectToDatabase();
 
@@ -146,5 +161,6 @@ app.delete('/api/admin/users/:id', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}!`);
+    const serverIp = getServerIp();
+    console.log(`Server is running on http://${serverIp}:${PORT}`);
 });

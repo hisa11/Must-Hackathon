@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // 2秒後にサインイン画面にリダイレクト
                 setTimeout(function() {
                     window.location.href = '../login.html';
-                }, 2000);
+                }, 1000);
             } else {
                 throw new Error(data.message);
             }
