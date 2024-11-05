@@ -1,0 +1,67 @@
+body{
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+#vocabularyList {
+    color: white;
+    text-align: center;
+}
+#form {
+    width: 400px;
+    top: 8px;
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 50px;
+    text-align: center;
+    & button{
+        background-color: black;
+        color: white;
+        width: 430px;
+        padding: 5px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    & > div {
+        margin-bottom: 20px;
+        & > h2{
+            font-size: 30px;
+            color: white;
+        }
+        & > input {
+            width: 400px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+        }
+        & > * {
+            margin: auto;
+        }
+    }
+}
+
+#result {
+    color: white;
+    font-size: 20px; 
+    width: 50%;
+    position: absolute;
+    display: block;
+    top: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    & > h2 {
+        text-align: center;
+    }
+    & > div {
+        display: flex;
+        & > #word, #meaning {
+            flex: 1;
+            padding: 5%;
+            & > h3 {
+                text-align: center;
+            }
+        }
+    }
+}

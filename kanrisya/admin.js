@@ -21,27 +21,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ユーザー一覧を取得する関数
     function fetchUsers() {
-        fetch(`http://localhost:${PORT}/api/admin/users`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('ネットワーク応答が正常ではありません');
-                }
-                return response.json();
-            })
-            .then(data => {
-                displayUsers(data);
-            })
-            .catch(error => {
-                const userList = document.getElementById('userList');
-                userList.textContent = `エラー: ${error.message}`;
-                userList.style.color = 'red';
-            });
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('トークンが存在しません。ログインしてください。');
+            return;
+        }
+
+        fetch(`http://localhost:${PORT}/api/admin/users`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('ネットワーク応答が正常ではありません');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayUsers(data);
+        })
+        .catch(error => {
+            const userList = document.getElementById('userList');
+            userList.textContent = `エラー: ${error.message}`;
+            userList.style.color = 'red';
+        });
     }
 
     // ユーザーを削除する関数
     function deleteUser(userId) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('トークンが存在しません。ログインしてください。');
+            return;
+        }
+
         fetch(`http://localhost:${PORT}/api/admin/users/${userId}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
         .then(response => {
             if (!response.ok) {
@@ -65,6 +84,12 @@ document.addEventListener('DOMContentLoaded', function() {
     addUserForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert('トークンが存在しません。ログインしてください。');
+            return;
+        }
+
         const userData = {
             username: document.getElementById('username').value,
             email: document.getElementById('email').value,
@@ -74,7 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`http://localhost:${PORT}/api/admin/users`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(userData)
         })
